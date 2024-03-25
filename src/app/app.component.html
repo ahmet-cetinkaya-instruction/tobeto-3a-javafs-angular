@@ -11,6 +11,7 @@
   Sayaç 10 sayısını aştı. Azaltılması gerekiyor. Şuanki sayaç: {{ counter }}
 </div>
 <!-- else if (counter > 5) -->
+<!-- Soyut bir element, görüntülenmesi için ek bir çağırma işlemine ihtiyaç duyar. -->
 <ng-template #counterElseIf>
   <div *ngIf="counter > 5; else counterElse">
     Sayaç ideal seviyede. 5'ten büyük.
@@ -21,8 +22,39 @@
   </ng-template>
 </ng-template>
 
-<button type="button" class="btn btn-primary" (click)="incrementCounter()">
-  Primary
+<button type="button" class="btn btn-primary" (click)="onIncrementCounter()">
+  Sayaç Arttır
+</button>
+
+<ul>
+  <!-- Verilerin fronend'de hali hazırda geldiğini varsayıyoruz. -->
+  <!-- <li *ngFor="let brand of brands.slice(0, pageSize)"> -->
+
+  <!-- Verilerin backend'den geldiğini varsayıyoruz. -->
+  <!-- foreach (let item of brands) -->
+  <!-- <li
+    *ngFor="let brand of brands"
+    class="text-bg-info"
+    [ngClass]="{ 'text-secondary': brand.discontinued }"
+  >
+    {{ brand.name }}
+  </li> -->
+
+  <!-- foreach (let item of brands) -->
+  <!-- Soyut bir element, görüntülenmesi için ek bir çağırma işlemine gerek yok. -->
+  <ng-container *ngFor="let brand of brands">
+    <!-- if (brand.discontinued) -->
+    <li
+      *ngIf="!brand.discontinued"
+      class="text-bg-info"
+      [ngClass]="{ 'text-secondary': brand.discontinued }"
+    >
+      {{ brand.name }}
+    </li>
+  </ng-container>
+</ul>
+<button type="button" class="btn btn-primary" (click)="onLoadMoreBrands()">
+  Daha fazla yükle
 </button>
 
 <app-footer></app-footer>
