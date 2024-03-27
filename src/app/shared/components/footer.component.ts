@@ -4,7 +4,15 @@ import { Component } from '@angular/core';
   selector: 'app-footer',
   standalone: true,
   imports: [],
-  template: ` <p>footer works!</p> `,
-  styles: ``,
+  template: `
+    <footer class="bg-dark text-light p-3">
+      <div class="container">footer works!</div>
+    </footer>
+  `,
+  styles: `
+    footer {
+      height: 4rem;
+    }
+  `,
 })
 export class FooterComponent {}
