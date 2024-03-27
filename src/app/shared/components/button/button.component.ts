@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-button',
@@ -10,8 +10,23 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ButtonComponent {
-  @Input() variant: ButtonVariant = 'primary';
+  // State
+  @Input() variant: ButtonVariant = 'primary'; // variant="primary"
+  @Output() click = new EventEmitter<MouseEvent>(); // (click)="onClick($event)"
 
+  // Lifecycle
+
+  // Main
+
+  // Event
+  onClick(event: MouseEvent) {
+    // Ekstra tüm butonlar için çalışacak eylem de gerçekleştirilebilir.
+
+    // Output eventini tetikleyebiliriz.
+    this.click.emit(event);
+  }
+
+  // Helpers
   get buttonClass(): string {
     return `btn btn-${this.variant}`;
   }

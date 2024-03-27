@@ -1,0 +1,13 @@
+// scss
+:host {
+  display: block;
+
+  .app-overlay {
+    height: 25rem; // 1rem 16px
+  }
+}
+
+// css
+// :host .app-overlay {
+//   height: 25rem; // 1rem 16px
+// }

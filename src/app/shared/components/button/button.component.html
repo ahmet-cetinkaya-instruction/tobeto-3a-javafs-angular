@@ -1,3 +1,6 @@
-<button type="button" [class]="buttonClass">
+<button type="button" [class]="buttonClass" (click)="onClick($event)">
+  <!-- $event ilgili eventin geçtiği datayı geçmemize olanak tanır. -->
+
+  <!-- Component içerisine template geçmemize olanak tanır. -->
   <ng-content></ng-content>
 </button>
