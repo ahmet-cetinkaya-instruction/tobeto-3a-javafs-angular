@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavbarComponent, NavItem } from '../../components/navbar/navbar.component';
+import { NavbarComponent, NavItem, NavTitle } from '../../components/navbar/navbar.component';
 import { FooterComponent } from '../../components/footer.component';
 
 @Component({
@@ -10,6 +10,7 @@ import { FooterComponent } from '../../components/footer.component';
   styleUrl: './home-layout.component.scss',
 })
 export class HomeLayoutComponent {
+  navTitle : NavTitle = { text: 'Rent A Car', routerLink: '/' };
   navItems : NavItem[] = [
     { label: 'Home', link: '/' },
     { label: 'About', link: '/about' },

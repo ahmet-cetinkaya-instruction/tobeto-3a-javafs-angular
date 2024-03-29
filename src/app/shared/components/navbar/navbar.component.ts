@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, Input, TemplateRef } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { ButtonComponent } from '../button/button.component';
 
 // export interface NavItemInterface {
 //   label: string;
@@ -12,18 +13,32 @@ export type NavItem = {
   link: string;
 };
 
+export type NavTitle =
+  | {
+      text: string;
+      routerLink?: string | string[];
+      // routerLink: string | undefined;
+    }
+  | undefined;
+
 @Component({
   selector: 'app-navbar',
   standalone: true,
   imports: [
     CommonModule, //ngFor
     RouterModule, //routerLink
+    ButtonComponent
   ],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss',
 })
 export class NavbarComponent {
+  @Input() title: NavTitle;
   @Input() navItems: NavItem[] = [];
+  @Input() endContentTemplate?: TemplateRef<any>;
+  // @Input() endContent?: TemplateRef<any>;
+  // @Input() endContent?: TemplateRef<any>;
+  // @Input() endContent?: TemplateRef<any>;
 
   isUrl(url: string): boolean {
     return (
