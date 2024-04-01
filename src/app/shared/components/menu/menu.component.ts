@@ -18,8 +18,7 @@ export type MenuItem = {
 })
 export class MenuComponent {
   @Input() items: MenuItem[] = [];
-
-  selectedItemIndex: number | null = null;
+  @Input() selectedItemIndex: number | null = null;
 
   onItemClick(event: MouseEvent, menuItem: MenuItem, itemIndex: number) {
     this.selectedItemIndex =
