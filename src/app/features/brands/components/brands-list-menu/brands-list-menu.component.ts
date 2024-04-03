@@ -75,11 +75,13 @@ export class BrandsListMenuComponent implements OnInit {
   }
 
   get brandsMenuItems(): MenuItem[] {
-    return this.brands?.map((brand) => {
-      return {
-        label: brand.name!, // ! : null olmayan bir değer olduğunu belirtir.
-        click: (_: MouseEvent) => this.onSelectBrand(brand),
-      };
-    });
+    return (
+      this.brands?.map((brand) => {
+        return {
+          label: brand.name!, // ! : null olmayan bir değer olduğunu belirtir.
+          click: (_: MouseEvent) => this.onSelectBrand(brand),
+        };
+      }) ?? []
+    );
   }
 }
