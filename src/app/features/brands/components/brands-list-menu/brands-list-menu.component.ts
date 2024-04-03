@@ -12,8 +12,12 @@ import {
   MenuComponent,
   MenuItem,
 } from '../../../../shared/components/menu/menu.component';
-import { BrandListItemDto } from '../../models/brand-list-item-dto';
-import { BrandsService } from '../../services/brands.service';
+// import { BrandListItemDto } from '../../models/brand-list-item-dto';
+import {
+  BrandControllerService,
+  GetAllBrandResponse,
+} from '../../../../shared/services/api';
+// import { BrandsService } from '../../services/brands.service';
 
 @Component({
   selector: 'app-brands-list-menu',
@@ -25,14 +29,17 @@ import { BrandsService } from '../../services/brands.service';
 })
 export class BrandsListMenuComponent implements OnInit {
   @Input() initialSelectedBrandId: number | null = null; // 1. OnPush, yönteminde input değerlerinde değişiklik olduğunda değişikliği algılar.
-  @Output() selectBrand = new EventEmitter<BrandListItemDto | null>();
+  @Output() selectBrand = new EventEmitter<GetAllBrandResponse | null>();
 
-  brands!: BrandListItemDto[];
-  selectedBrand: BrandListItemDto | null = null;
+  brands!: GetAllBrandResponse[];
+  selectedBrand: GetAllBrandResponse | null = null;
   initialSelectedBrandIndex: number | null = null;
 
   // brandsService: BrandsService;
-  constructor(private brandsService: BrandsService, private change: ChangeDetectorRef) {
+  constructor(
+    private brandsService: BrandControllerService,
+    private change: ChangeDetectorRef
+  ) {
     // this.brandsService = brandsService;
   }
 
@@ -43,7 +50,7 @@ export class BrandsListMenuComponent implements OnInit {
   }
 
   getBrandsList() {
-    this.brandsService.getBrands().subscribe((response) => {
+    this.brandsService.getAllBrands().subscribe((response) => {
       this.brands = response;
 
       if (this.initialSelectedBrandId) {
@@ -62,7 +69,7 @@ export class BrandsListMenuComponent implements OnInit {
   }
 
   // 2. OnPush, kullancı html üzerinden bir event tetiklendiğinde değişikliği algılar.
-  onSelectBrand(brand: BrandListItemDto) {
+  onSelectBrand(brand: GetAllBrandResponse) {
     this.selectedBrand = this.selectedBrand?.id !== brand.id ? brand : null;
     this.selectBrand.emit(this.selectedBrand);
   }
@@ -70,7 +77,7 @@ export class BrandsListMenuComponent implements OnInit {
   get brandsMenuItems(): MenuItem[] {
     return this.brands?.map((brand) => {
       return {
-        label: brand.name,
+        label: brand.name!, // ! : null olmayan bir değer olduğunu belirtir.
         click: (_: MouseEvent) => this.onSelectBrand(brand),
       };
     });
