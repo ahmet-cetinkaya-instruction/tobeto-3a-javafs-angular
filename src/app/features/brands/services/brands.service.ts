@@ -1,14 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { BrandListItemDto } from '../models/brand-list-item-dto';
 import { environment } from '../../../../environments/environment';
+import { GetAllBrandResponse } from '../../../shared/services/api';
 
 @Injectable({
   providedIn: 'root',
 }) // Singleton
 export class BrandsService {
-  private readonly controllerUrl = `${environment.apiUrl}/brands`;
+  private readonly controllerUrl = `${environment.apiUrl}/api/v1/brands`;
   // data = [
   //   { id: 1, name: 'Toyota' },
   //   { id: 2, name: 'Ford' },
@@ -24,7 +24,7 @@ export class BrandsService {
 
   constructor(private httpClient: HttpClient) {}
 
-  getBrands(): Observable<BrandListItemDto[]> {
-    return this.httpClient.get<BrandListItemDto[]>(this.controllerUrl);
+  getBrands(): Observable<GetAllBrandResponse[]> {
+    return this.httpClient.get<GetAllBrandResponse[]>(this.controllerUrl);
   }
 }
