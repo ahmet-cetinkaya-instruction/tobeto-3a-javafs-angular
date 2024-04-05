@@ -1,5 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  OnInit,
+} from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -11,6 +16,7 @@ import {
   BrandControllerService,
   CreateBrandRequestParams,
 } from '../../../../shared/services/api';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-add-brand-form',
@@ -20,6 +26,7 @@ import {
     // FormsModule,
     ReactiveFormsModule,
     ButtonComponent,
+    RouterModule
   ],
   templateUrl: './add-brand-form.component.html',
   styleUrl: './add-brand-form.component.scss',
@@ -32,7 +39,8 @@ export class AddBrandFormComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private brandsService: BrandControllerService,
-    private change: ChangeDetectorRef
+    private change: ChangeDetectorRef,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -69,8 +77,11 @@ export class AddBrandFormComponent implements OnInit {
       complete: () => {
         // Complete: Observable'dan gelen veri akışının tamamlandığını bildiren fonksiyon. Complete çalıştığı taktirde observable'dan gelen veri akışı sona erer.
         this.formMessage = 'Brand added successfully';
-        this.form.reset();
         this.change.markForCheck();
+
+        setTimeout(() => {
+          this.router.navigate(['/management', 'brands']);
+        }, 2000);
       },
     });
   }
