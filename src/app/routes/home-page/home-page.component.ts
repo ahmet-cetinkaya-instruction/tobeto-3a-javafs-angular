@@ -1,3 +1,4 @@
+import { ModelsCardListComponent } from './../../features/models/components/models-card-list/models-card-list.component';
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { HomeLayoutComponent } from '../../shared/layouts/home-layout/home-layout.component';
@@ -14,6 +15,7 @@ import { GetAllBrandResponse } from '../../shared/services/api';
     HomeLayoutComponent,
     ButtonComponent,
     BrandsListMenuComponent,
+    ModelsCardListComponent
   ],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.scss',
