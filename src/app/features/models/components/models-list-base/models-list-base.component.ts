@@ -25,7 +25,7 @@ export class ModelsListBaseComponent {
   // modelsService: ModelsService;
   constructor(
     private modelsService: ModelControllerService,
-    private change: ChangeDetectorRef
+    protected change: ChangeDetectorRef
   ) {
     // this.modelsService = modelsService;
   }
